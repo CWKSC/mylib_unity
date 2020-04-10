@@ -1,8 +1,6 @@
 ﻿using MyLib_Csharp.DataStructure;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 
 namespace MyLib_Csharp.CommonClass
@@ -63,7 +61,14 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             action();
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "\trun " + stopwatch.MyToString());
+        }
+        public static void TestExecutionTime(string name, Action action)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            action();
+            stopwatch.Stop();
+            Console.WriteLine(name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
         }
 
         public static void TestExecutionTime(this Action action, int times)
@@ -71,7 +76,15 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             for(int i = 0; i < times; i++){ action(); }
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " " + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times + " ms");
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "\t" + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times + " ms");
+        }
+
+        public static void TestExecutionTime(string name, Action action, int times)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            for (int i = 0; i < times; i++) { action(); }
+            stopwatch.Stop();
+            Console.WriteLine(name.PadRight(20, ' ') + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times + " ms");
         }
 
         public static void TestExecutionTime<P1>(this Action<P1> action, P1 p1)
@@ -79,14 +92,14 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             action(p1);
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
         }
         public static void TestExecutionTime<P1>(this Action<P1[]> action, params P1[] p1)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             action(p1);
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
         }
 
 
@@ -95,28 +108,28 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             action(p1, p2);
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
         }
         public static void TestExecutionTime<P1, P2, P3>(this Action<P1, P2, P3> action, P1 p1, P2 p2, P3 p3)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             action(p1, p2, p3);
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
         }
         public static void TestExecutionTime<P1, P2, P3, P4>(this Action<P1, P2, P3, P4> action, P1 p1, P2 p2, P3 p3, P4 p4)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             action(p1, p2, p3, p4);
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
         }
         public static void TestExecutionTime<P1, P2, P3, P4, P5>(this Action<P1, P2, P3, P4, P5> action, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             action(p1, p2, p3, p4, p5);
             stopwatch.Stop();
-            Console.WriteLine(action.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(action.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
         }
         public static void TestExecutionTime<P1, P2, P3, P4, P5, P6>(this Action<P1, P2, P3, P4, P5, P6> action, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6) 
         {
@@ -176,22 +189,39 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             Output output = func();
             stopwatch.Stop();
-            Console.WriteLine(func.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(func.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
             return output;
         }
+        public static Output TestExecutionTime<Output>(string name, Func<Output> func)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            Output output = func();
+            stopwatch.Stop();
+            Console.WriteLine(name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
+            return output;
+        }
+
         public static void TestExecutionTime<Output>(this Func<Output> func, int times)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             for(int i = 0; i < times; i++) { func(); }
             stopwatch.Stop();
-            Console.WriteLine(func.Method.Name + " " + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times);
+            Console.WriteLine(func.Method.Name.PadRight(20, ' ') + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times);
         }
+        public static void TestExecutionTime<Output>(string name, Func<Output> func, int times)
+        {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            for (int i = 0; i < times; i++) { func(); }
+            stopwatch.Stop();
+            Console.WriteLine(name.PadRight(20, ' ') + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times);
+        }
+
         public static Output TestExecutionTime<P1, Output>(this Func<P1, Output> func, P1 p1)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             Output output = func(p1);
             stopwatch.Stop();
-            Console.WriteLine(func.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(func.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
             return output;
         }
         public static Output TestExecutionTime<P1, Output>(this Func<P1[], Output> func, params P1[] p1)
@@ -199,7 +229,7 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             Output output = func(p1);
             stopwatch.Stop();
-            Console.WriteLine(func.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(func.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
             return output;
         }
         public static void TestExecutionTime<P1, Output>(this Func<P1, Output> func, P1 p1, int times)
@@ -207,7 +237,7 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < times; i++) { func(p1); }
             stopwatch.Stop();
-            Console.WriteLine(func.Method.Name + " " + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times);
+            Console.WriteLine(func.Method.Name.PadRight(20, ' ') + times + " times run " + stopwatch.MyToString() + ", average : " + stopwatch.Elapsed.TotalMilliseconds / times);
         }
 
 
@@ -216,7 +246,7 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             Output output = func(p1, p2);
             stopwatch.Stop();
-            Console.WriteLine(func.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(func.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
             return output;
         }
         public static Output TestExecutionTime<P1, P2, P3, Output>(this Func<P1, P2, P3, Output> func, P1 p1, P2 p2, P3 p3)
@@ -224,8 +254,37 @@ namespace MyLib_Csharp.CommonClass
             Stopwatch stopwatch = Stopwatch.StartNew();
             Output output = func(p1, p2, p3);
             stopwatch.Stop();
-            Console.WriteLine(func.Method.Name + " run " + stopwatch.MyToString());
+            Console.WriteLine(func.Method.Name.PadRight(20, ' ') + "run " + stopwatch.MyToString());
             return output;
+        }
+
+
+        // Prime Test //
+        public static bool TestPrimeTestCorrect(Func<int, bool> isPrime)
+        {
+            for (int i = 0; i < short.MaxValue; i++)
+            {
+                if (MyMath.IsPrime_normal(i) ^ isPrime(i))
+                {
+                    Console.WriteLine(isPrime.Method.Name.PadRight(20, ' ') + "fail in " + i + ", because isPrime(" + i + ") = " + isPrime(i));
+                    return false;
+                }
+            }
+            Console.WriteLine(isPrime.Method.Name.PadRight(20, ' ') + "pass");
+            return true;
+        }
+        public static bool TestPrimeTestCorrect(string name, Func<int, bool> isPrime)
+        {
+            for (int i = 0; i < short.MaxValue; i++)
+            {
+                if (MyMath.IsPrime_normal(i) ^ isPrime(i))
+                {
+                    Console.WriteLine(isPrime.Method.Name.PadRight(20, ' ') + "fail in " + i + ", because isPrime(" + i + ") = " + isPrime(i));
+                    return false;
+                }
+            }
+            Console.WriteLine(name.PadRight(20, ' ') + "pass");
+            return true;
         }
 
 

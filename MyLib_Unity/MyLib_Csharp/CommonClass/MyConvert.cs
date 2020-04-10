@@ -2,15 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace MyLib_Csharp.CommonClass
 {
-    static class MyConvert
+    public static class MyConvert
     {
-
         #region Vector2 convert
         public static double ToDegrees(this Vector2 vector2) => MyMath.CartesianToPolar_Degrees(vector2);
+
         public static double ToRadians(this Vector2 vector2) => MyMath.CartesianToPolar_Radians(vector2);
         public static double ToPI(this Vector2 vector2) => MyMath.CartesianToPolar_PI(vector2);
         public static double ToGradians(this Vector2 vector2) => MyMath.CartesianToPolar_Gradians(vector2);
@@ -37,6 +36,18 @@ namespace MyLib_Csharp.CommonClass
             {
                 Console.WriteLine(string.Format("Unable to convert value:[{0}]", value));
                 return false;
+            }
+        }
+
+        public static bool ToBool(this string value)
+        {
+            switch (value)
+            {
+                case "T": return true;
+                case "F": return false;
+                default:
+                    Console.WriteLine(string.Format("Unable to convert value:[{0}]", value));
+                    return false;
             }
         }
 

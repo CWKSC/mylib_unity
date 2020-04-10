@@ -2,16 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace MyLib_Csharp.DataStructure
 {
-    enum AngleType
+    public enum AngleType
     {
         Degrees, Radians, Pi, Gradians, Turns
     }
 
-    class Angle
+    public class Angle
     {
         private double degrees;
         private double radians;

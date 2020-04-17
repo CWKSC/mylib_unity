@@ -6,6 +6,32 @@ using UnityEngine;
 public class MyInput
 {
 
+    public static void MouseXY(Action<float, float> action)
+    {
+        action(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+    }
+
+    public static void WASD(Action w, Action a, Action s, Action d)
+    {
+        if (Input.GetKey(KeyCode.W)) w();
+        if (Input.GetKey(KeyCode.A)) a();
+        if (Input.GetKey(KeyCode.S)) s();
+        if (Input.GetKey(KeyCode.D)) d();
+    }
+
+
+    public static void Space(Action space)
+    {
+        if (Input.GetKey(KeyCode.Space)) space();
+    }
+
+
+    public static void LeftShift(Action leftShift)
+    {
+        if (Input.GetKey(KeyCode.LeftShift)) leftShift();
+    }
+
+
     #region Left Mouse 
     public static void LeftMouse(Action action)
     {

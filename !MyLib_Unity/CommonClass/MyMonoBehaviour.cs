@@ -72,5 +72,27 @@ public class MyMonoBehaviour : MonoBehaviour
 
 
 
+    private float yaw = 0;
+    private float pitch = 0;
+
+    public void RotateByMouse(float speedH, float speedV)
+    {
+        yaw += speedH * Input.GetAxis("Mouse X");
+        pitch -= speedV * Input.GetAxis("Mouse Y");
+        pitch = Mathf.Clamp(pitch, -60f, 90f);
+        transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+    }
+
+    public void MoveByWASD(float speed) => MyInput.WASD(
+            () => transform.position += transform.forward * speed,
+            () => transform.position += -transform.right * speed,
+            () => transform.position += -transform.forward * speed,
+            () => transform.position += transform.right * speed);
+
+    public void UpBySpace(float speed) => MyInput.Space(() => transform.position += Vector3.up * speed);
+
+    public void DownByLeftShift(float speed) => MyInput.LeftShift(() => transform.position += -Vector3.up * speed);
+
+
 
 }

@@ -29,8 +29,10 @@ public class MyUI
     {
         // Referencing this code for GraphicRaycaster https://gist.github.com/stramit/ead7ca1f432f3c0f181f
         // the ray cast appears to require only eventData.position.
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+        {
+            position = new Vector2(Input.mousePosition.x, Input.mousePosition.y)
+        };
 
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
@@ -39,8 +41,10 @@ public class MyUI
     }
     public static bool IsPointerOverUIObject(Canvas canvas, Vector2 screenPosition)
     {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = screenPosition;
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
 
         GraphicRaycaster uiRaycaster = canvas.gameObject.GetComponent<GraphicRaycaster>();
         List<RaycastResult> results = new List<RaycastResult>();
@@ -54,8 +58,10 @@ public class MyUI
     /// </summary>
     public static List<RaycastResult> UIRaycast(Canvas canvas, Vector2 screenPosition)
     {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = screenPosition;
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+        {
+            position = screenPosition
+        };
 
         GraphicRaycaster uiRaycaster = canvas.gameObject.GetComponent<GraphicRaycaster>();
         List<RaycastResult> results = new List<RaycastResult>();

@@ -115,12 +115,9 @@ public class MyGameObject
     public static List<Transform> SearchChildsPartName(Transform target, string name)
     {
         List<Transform> objs = new List<Transform>();
-        Transform child = null;
-
         for (int i = 0; i < target.childCount; ++i)
         {
-            child = target.GetChild(i);
-
+            Transform child = target.GetChild(i);
             if (child != null)
             {
                 if (child.name.IndexOf(name, 0) >= 0)
@@ -173,10 +170,7 @@ public class MyGameObject
         }
 
 
-        if (callback != null)
-        {
-            callback();
-        }
+        callback?.Invoke();
 
 
         if (id == -1)
